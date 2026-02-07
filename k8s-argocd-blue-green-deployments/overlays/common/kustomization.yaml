@@ -1,0 +1,73 @@
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
+
+configMapGenerator:
+  - name: env-vars
+    behavior: merge
+    options:
+      disableNameSuffixHash: true
+
+replacements:
+  # Replace Ingress/Service namespace
+  - source:
+      kind: ConfigMap
+      name: env-vars
+      fieldPath: data.ENV
+    targets:
+      - select:
+          kind: Rollout
+          name: py-app
+        fieldPaths:
+          - metadata.namespace
+      - select:
+          kind: Rollout
+          name: py-app
+        fieldPaths:
+          - spec.strategy.blueGreen.activeService
+        options:
+          delimiter: "-"
+          index: 0
+      - select:
+          kind: Rollout
+          name: py-app
+        fieldPaths:
+          - spec.strategy.blueGreen.previewService
+        options:
+          delimiter: "-"
+          index: 0
+      - select:
+          kind: Service
+          name: py-app-active-svc
+        fieldPaths:
+          - metadata.namespace
+      - select:
+          kind: Service
+          name: py-app-preview-svc
+        fieldPaths:
+          - metadata.namespace
+      - select:
+          kind: ServiceAccount
+          name: demo-eks-sa
+        fieldPaths:
+          - metadata.namespace
+      - select:
+          kind: Ingress
+        fieldPaths:
+          - metadata.namespace
+      - select:
+          kind: Ingress
+        fieldPaths:
+          - metadata.annotations.[alb.ingress.kubernetes.io/load-balancer-name]
+        options:
+          delimiter: "-"
+          index: 0  
+      - select:
+          kind: Service
+          name: py-app-active-svc
+        fieldPaths:
+          - metadata.namespace
+      - select:
+          kind: Service
+          name: py-app-preview-svc
+        fieldPaths:
+          - metadata.namespace

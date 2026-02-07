@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: py-app
+  namespace: NAMESPACE
+spec:
+  replicas: 3
+
+  strategy:
+    blueGreen:
+      activeService: NAMESPACE-py-app-active-svc
+      previewService: NAMESPACE-py-app-preview-svc
+      autoPromotionEnabled: false
+
+  selector:
+    matchLabels:
+      app: py-app
+
+  template:
+    metadata:
+      labels:
+        app: py-app
+    spec:
+      containers:
+        - name: py-app
+          image: rmsh8/python-blue:latest
+          ports:
+            - containerPort: 5000
