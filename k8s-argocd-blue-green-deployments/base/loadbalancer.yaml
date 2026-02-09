@@ -26,7 +26,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: py-app-active-svc
+                name: NAMESPACE-py-app-active-svc
                 port:
                   number: 80
     - http:
@@ -35,6 +35,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: py-app-preview-svc
+                name: NAMESPACE-py-app-preview-svc
                 port:
                   number: 80

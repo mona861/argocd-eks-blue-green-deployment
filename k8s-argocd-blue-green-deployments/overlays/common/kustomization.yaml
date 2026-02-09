@@ -66,8 +66,14 @@ replacements:
           name: py-app-active-svc
         fieldPaths:
           - metadata.namespace
+        options:
+          delimiter: "-"
+          index: 0
       - select:
           kind: Service
           name: py-app-preview-svc
         fieldPaths:
           - metadata.namespace
+        options:
+          delimiter: "-"
+          index: 0
