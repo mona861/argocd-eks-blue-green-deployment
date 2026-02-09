@@ -58,22 +58,7 @@ replacements:
           kind: Ingress
         fieldPaths:
           - metadata.annotations.[alb.ingress.kubernetes.io/load-balancer-name]
-        options:
-          delimiter: "-"
-          index: 0  
-      - select:
-          kind: Service
-          name: py-app-active-svc
-        fieldPaths:
-          - metadata.namespace
-        options:
-          delimiter: "-"
-          index: 0
-      - select:
-          kind: Service
-          name: py-app-preview-svc
-        fieldPaths:
-          - metadata.namespace
+          - spec.rules.*.http.paths.*.backend.service.name
         options:
           delimiter: "-"
           index: 0
