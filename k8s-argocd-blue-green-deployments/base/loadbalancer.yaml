@@ -31,10 +31,10 @@ spec:
                   number: 80
     - http:
         paths:
-          - path: /preview
+          - path: /
             pathType: Prefix
             backend:
               service:
                 name: NAMESPACE-py-app-preview-svc
                 port:
-                  number: 80
+                  number: 8082
