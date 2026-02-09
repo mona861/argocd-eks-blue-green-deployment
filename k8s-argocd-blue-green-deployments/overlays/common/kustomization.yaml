@@ -57,6 +57,7 @@ replacements:
       - select:
           kind: Ingress
         fieldPaths:
+          - metadata.annotations.[alb.ingress.kubernetes.io/group.name]
           - metadata.annotations.[alb.ingress.kubernetes.io/load-balancer-name]
           - spec.rules.*.http.paths.*.backend.service.name
         options:
