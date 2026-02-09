@@ -15,6 +15,7 @@ metadata:
 
     # Optional but recommended
     alb.ingress.kubernetes.io/load-balancer-name: NAMESPACE-alb
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTP": 8082}]'
     #alb.ingress.kubernetes.io/healthcheck-port: "5000"
     #alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":5000}]'
 spec:
