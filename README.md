@@ -24,7 +24,7 @@ Before installing ArgoCD, ensure you have:
 
 ## 🎯Installation
 ### 1. Install Argo Rollout cli
-[Argo Rollout cli](https://argo-rollouts.readthedocs.io/en/stable/installation/)
+[Click For Argo Rollout CLI Installation Instructions](https://argo-rollouts.readthedocs.io/en/stable/installation/)
 ### 2. Install ArgoCD and Argo Rollout With Helm Chart
 The script will install argo cd helm chart on your EKS cluster
 ```bash
@@ -61,24 +61,27 @@ Click on the application and your setup will be visible
 ![revision1 infra](https://github.com/mona861/argocd-eks-blue-green-deployment/blob/main/doc/screenshots/argo-dashboard.png)
 
 ## 🔵 Check Active Revision (Blue Deployment)
-Open Argo CD dashboard
-You will see active deployment's replica set
-![revision1](https://github.com/mona861/argocd-eks-blue-green-deployment/blob/main/docs/screenshots/blue-infra.png)
+- Open Argo CD dashboard
+  - You will see active deployment's replica set <br/>
+  ![revision1](https://github.com/mona861/argocd-eks-blue-green-deployment/blob/main/docs/screenshots/blue-infra.png)
 
-Open Argo Rollout dashboard.
-You will see one revision which is the active revision <br/>
-![revision1](https://github.com/mona861/argocd-eks-blue-green-deployment/blob/main/docs/screenshots/blue-deployment.png)
+- Open Argo Rollout dashboard.
+  - You will see one revision which is the active revision <br/>
+  ![revision1](https://github.com/mona861/argocd-eks-blue-green-deployment/blob/main/docs/screenshots/blue-deployment.png)
 
 ## 🟢 How To Create a Preview Revision (Green Deployment)
-- Edit the image in the manifests in k8s-manifests/base/deployment.yaml 
+- Edit the image in the manifests in **k8s-manifests/base/deployment.yaml** 
 - Commit and Push to Git
 - Check the ArgoCD dashboard. Gitops will identify changes and sync them
-- A new replica set appear which is attached to the preview service
+- A new replica set appear which is attached to the preview service <br/>
 ![revision1 and revision2 infra](https://github.com/mona861/argocd-eks-blue-green-deployment/blob/main/docs/screenshots/preview-infra.png)
 
-- Open the Argo Rollout dashboard. You will now see 2 revisions.
+- Open the Argo Rollout dashboard. You will now see 2 revisions. <br/>
 ![revision1 and revision2](https://github.com/mona861/argocd-eks-blue-green-deployment/blob/main/docs/screenshots/green-deployment.png)
 
+- Ingress rules for reviewing active & preview service links are in **k8s-manifests/base/loadbalancer.yaml**
+  - <span style="color:blue; font-weight:bold">_Active Service_</span> is available at URL: <span style="color:blue">http://<ALB_URL>/</sapn>
+  - <span style="color:green; font-weight:bold">_Preview Service_</span> is available at URL: <span style="color:green">http://<ALB_URL>:8082/</green>
 ## ✅ How To Promote the Preview Revision (Make Green Deployment Active)
 - Open the Argo Rollout dashboard.
 - Click on the promote button
