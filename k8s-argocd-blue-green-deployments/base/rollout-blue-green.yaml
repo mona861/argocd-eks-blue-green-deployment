@@ -23,6 +23,6 @@ spec:
     spec:
       containers:
         - name: py-app
-          image: rmsh8/python-green:latest
+          image: rmsh8/python-blue:latest
           ports:
             - containerPort: 5000
